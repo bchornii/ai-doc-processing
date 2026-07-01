@@ -1,13 +1,2 @@
 <Solution>
-  <Folder Name="/src/">
-    <Project Path="src/DocumentProcessing.Application/DocumentProcessing.Application.csproj" />
-    <Project Path="src/DocumentProcessing.Contracts/DocumentProcessing.Contracts.csproj" />
-    <Project Path="src/DocumentProcessing.Core/DocumentProcessing.Core.csproj" />
-    <Project Path="src/DocumentProcessing.Functions/DocumentProcessing.Functions.csproj" />
-    <Project Path="src/DocumentProcessing.Infrastructure/DocumentProcessing.Infrastructure.csproj" />
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests/DocumentProcessing.IntegrationTests/DocumentProcessing.IntegrationTests.csproj" />
-    <Project Path="tests/DocumentProcessing.UnitTests/DocumentProcessing.UnitTests.csproj" />
-  </Folder>
 </Solution>
