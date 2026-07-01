@@ -6,6 +6,9 @@ echo "========================================="
 echo "AI Document Processing - Dev Container"
 echo "========================================="
 
+echo "Validating development environment..."
+bash scripts/validate-dev-env.sh
+
 echo ""
 echo "Restoring NuGet packages..."
 dotnet restore
