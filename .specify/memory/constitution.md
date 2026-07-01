@@ -186,6 +186,30 @@ Delivery speed is important, but production readiness, reliability, security, ma
 
 ---
 
+## XIII. Coding Standards and Style Enforcement
+
+**Rationale:** Consistent code style, naming conventions, and static analysis rules reduce review friction, prevent common defects, and ensure generated code integrates cleanly with the existing codebase.
+
+### Mandatory requirements
+
+- All source code must conform to the rules defined in `.editorconfig` at the repository root.
+- The `.editorconfig` file is the authoritative source for formatting, naming conventions, and Roslyn/StyleCop/Meziantou analyzer severity settings.
+- When generating C# source code — whether manually authored, scaffolded, or AI-assisted — the `.editorconfig` rules must be applied. Key rules include:
+  - Indentation: 4 spaces for `.cs`; 2 spaces for `.csproj`, `.json`, `.yml`.
+  - Line endings: CRLF (LF for `.sh` files).
+  - Always use `var` for local variables.
+  - `using` directives must be placed outside the namespace.
+  - Braces are always required; opening braces appear on a new line.
+  - Private instance fields must use `_camelCase` prefix.
+  - Interfaces must use the `I` prefix with PascalCase.
+  - Generic type parameters must use the `T` prefix with PascalCase.
+  - Classes must be `sealed` unless inheritance is explicitly required (MA0053).
+  - Null checks must use `is null` / `is not null` pattern matching.
+- The `.editorconfig` file must be kept up to date and treated as a version-controlled engineering asset.
+- Violations reported by the analyzer rules in `.editorconfig` must be resolved before merging; build-breaking severity settings (`error`) are not suppressible without documented justification.
+
+---
+
 # Delivery and Review Standards
 
 ## Mandatory pull request checks
@@ -221,6 +245,6 @@ Delivery speed is important, but production readiness, reliability, security, ma
 
 ---
 
-**Version**: 1.1.0
+**Version**: 1.2.0
 **Ratified**: 2026-06-30
-**Last Amended**: 2026-06-30
+**Last Amended**: 2026-07-01
