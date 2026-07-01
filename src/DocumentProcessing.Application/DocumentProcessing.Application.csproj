@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\DocumentProcessing.Contracts\DocumentProcessing.Contracts.csproj" />
     <ProjectReference Include="..\DocumentProcessing.Core\DocumentProcessing.Core.csproj" />
   </ItemGroup>
 
