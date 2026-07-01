@@ -1,9 +1,0 @@
-{
-  "IsEncrypted": false,
-  "Values": {
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "DTS_CONNECTION_STRING": "Endpoint=http://localhost:8080;Authentication=None",
-    "TASKHUB_NAME": "default"
-  }
-}
