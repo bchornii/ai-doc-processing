@@ -9,7 +9,7 @@ cd "$REPO_ROOT"
 
 echo "Repository: $REPO_ROOT"
 
-# Fix Windows + Linux container file mode noise
+# Fix Windows + Linux container file mode noise caused by inconsistent file permissions
 CURRENT_FILEMODE="$(git config --local --get core.filemode || true)"
 
 if [ "$CURRENT_FILEMODE" != "false" ]; then
