@@ -32,3 +32,4 @@
 ## Notes
 
 - All items pass. Spec is ready for `/speckit.clarify` or `/speckit.plan`.
+- 2026-07-01: FR-004 and User Story 3 updated to replace ambiguous "dominant page classification" with explicit first-match priority-order semantics (Invoice → Contract → BoundedDocument → General → Email → None). Added classifier responsibility note for mixed-content PDF detection.
