@@ -1,0 +1,7 @@
+﻿### Process documents batch
+POST http://localhost:7071/api/process-documents
+Content-Type: application/json
+
+{
+  "container_name": "documents"
+}

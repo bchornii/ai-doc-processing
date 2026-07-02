@@ -1,10 +1,6 @@
-{
+﻿{
   "version": "2.0",
   "telemetryMode": "OpenTelemetry",
-  "extensionBundle": {
-    "id": "Microsoft.Azure.Functions.ExtensionBundle",
-    "version": "[4.*, 5.0.0)"
-  },
   "extensions": {
     "durableTask": {
       "storageProvider": {
@@ -16,7 +12,9 @@
   },
   "logging": {
     "logLevel": {
-      "default": "Information"
+      "default": "Information",
+      "Azure.Core": "Warning",
+      "Azure.Identity": "Warning"
     }
   }
 }
