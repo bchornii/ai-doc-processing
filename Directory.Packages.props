@@ -18,11 +18,11 @@
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.DurableTask" Version="1.17.1" />
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.DurableTask.AzureManaged" Version="1.9.0" />
     <PackageVersion Include="Microsoft.Azure.Functions.Worker.Extensions.Storage.Queues" Version="5.5.4" />
-    <PackageVersion Include="Microsoft.Azure.Functions.Worker.ApplicationInsights" Version="2.51.0" />
+    <PackageVersion Include="Microsoft.Azure.Functions.Worker.OpenTelemetry" Version="1.2.0" />
     <!-- DurableTask source generator (prerelease only — no stable release exists) -->
     <PackageVersion Include="Microsoft.DurableTask.Generators" Version="2.1.0-preview.2" />
-    <!-- Application Insights -->
-    <PackageVersion Include="Microsoft.ApplicationInsights.WorkerService" Version="2.23.0" />
+    <!-- Application Insights / OpenTelemetry -->
+    <PackageVersion Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.8.2" />
     <!-- Azure SDK -->
     <PackageVersion Include="Azure.Identity" Version="1.21.0" />
     <!-- Testing -->

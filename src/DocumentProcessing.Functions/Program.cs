@@ -1,7 +1,8 @@
-﻿using DocumentProcessing.Application.Activities;
+﻿using Azure.Monitor.OpenTelemetry.Exporter;
+using DocumentProcessing.Application.Activities;
 using DocumentProcessing.Infrastructure.Activities;
-using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Builder;
+using Microsoft.Azure.Functions.Worker.OpenTelemetry;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -9,11 +10,11 @@ var builder = FunctionsApplication.CreateBuilder(args);
 
 builder.ConfigureFunctionsWebApplication();
 
-// Application Insights telemetry for isolated worker
+// Application Insights via OpenTelemetry for isolated worker
 // DTS backend is configured in host.json extensions.durableTask.storageProvider
-builder.Services
-    .AddApplicationInsightsTelemetryWorkerService()
-    .ConfigureFunctionsApplicationInsights();
+builder.Services.AddOpenTelemetry()
+    .UseFunctionsWorkerDefaults()
+    .UseAzureMonitorExporter();
 
 builder.Services.AddScoped<IGetDocumentFoldersActivity, PlaceholderGetDocumentFoldersActivity>();
 builder.Services.AddScoped<IClassifyDocumentActivity, PlaceholderClassifyDocumentActivity>();
