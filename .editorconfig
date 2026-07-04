@@ -1296,6 +1296,8 @@ dotnet_diagnostic.IL3001.severity = warning
 # IDE0050: Convert to tuple
 dotnet_diagnostic.IDE0050.severity = none
 
+# IDE0160: Convert to block scoped namespace
+dotnet_diagnostic.IDE0160.severity = none
 
 ####################################
 # StyleCop Rules
