@@ -39,10 +39,12 @@ public static class ProcessDocumentBatchWorkflow
             input.CorrelationId);
 
         var folderTasks = folders.Folders
-            .Select(folder => context.CallSubOrchestratorAsync<WorkflowResult>(
-                nameof(ProcessDocumentWorkflow),
-                new ProcessDocumentFolderInput(folder, input.CorrelationId),
-                retryPolicy))
+            .Select(folder =>
+            {
+                var processDocFolderInput = new ProcessDocumentFolderInput(folder, input.CorrelationId);
+                return context
+                    .CallSubOrchestratorAsync<WorkflowResult>(nameof(ProcessDocumentWorkflow), processDocFolderInput, retryPolicy);
+            })
             .ToList();
 
         var folderResults = await Task.WhenAll(folderTasks);
