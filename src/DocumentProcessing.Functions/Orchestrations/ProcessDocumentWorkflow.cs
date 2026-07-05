@@ -80,8 +80,15 @@ public static class ProcessDocumentWorkflow
                     correlationId);
             }
 
-            var processingInput = new ProcessingInput(context, folder, documentFileName, correlationId, retryPolicy);
-            await processingStrategy.RunAsync(processingInput, processingCtx);
+            try
+            {
+                var processingInput = new ProcessingInput(context, folder, documentFileName, correlationId, retryPolicy);
+                await processingStrategy.RunAsync(processingInput, processingCtx);
+            }
+            catch (TaskFailedException e)
+            {
+                processingCtx.AddError(e.InnerException?.Message ?? e.Message);
+            }
         }
 
         logger.LogInformation(
