@@ -19,18 +19,18 @@ public class ProcessInvoice : IProcessingStrategy
 
         var extractInvoiceInput =
             new ExtractInvoiceActivityInput(folder.ContainerName, documentFileName, null, null, correlationId);
-        var invoiceResult = await context
+        var invoiceConfidenceResult = await context
             .CallActivityAsync<ConfidenceResult<Invoice>>(nameof(ExtractInvoiceActivity), extractInvoiceInput, retryPolicy);
 
         var persistInvoiceInput = new PersistResultActivityInput(
             folder.ContainerName,
             documentFileName,
-            JsonSerializer.SerializeToUtf8Bytes(invoiceResult),
+            JsonSerializer.SerializeToUtf8Bytes(invoiceConfidenceResult),
             correlationId);
         await context.CallActivityAsync<bool>(nameof(PersistResultActivity), persistInvoiceInput, retryPolicy);
 
         var validateInvoiceInput =
-            new ValidateInvoiceActivityInput(documentFileName, invoiceResult?.Data, correlationId);
+            new ValidateInvoiceActivityInput(documentFileName, invoiceConfidenceResult?.Data, correlationId);
         var invoiceValidation = await context
             .CallActivityAsync<ValidationResult>(nameof(ValidateInvoiceActivity), validateInvoiceInput, retryPolicy);
 

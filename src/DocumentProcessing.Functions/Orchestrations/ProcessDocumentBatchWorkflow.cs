@@ -4,6 +4,7 @@ using DocumentProcessing.Functions.Models;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.DurableTask;
 using Microsoft.Extensions.Logging;
+using static DocumentProcessing.Functions.Orchestrations.WorkflowUtils;
 
 namespace DocumentProcessing.Functions.Orchestrations;
 
@@ -17,10 +18,7 @@ public static class ProcessDocumentBatchWorkflow
         var logger = context.CreateReplaySafeLogger(nameof(ProcessDocumentBatchWorkflow));
         logger.LogInformation("Starting ProcessDocumentBatchWorkflow for CorrelationId={CorrelationId}", input.CorrelationId);
 
-        var retryPolicy = new TaskOptions(new RetryPolicy(
-            maxNumberOfAttempts: 3,
-            firstRetryInterval: TimeSpan.FromSeconds(5),
-            backoffCoefficient: 2.0));
+        var retryPolicy = CreateActivityRetryPolicy();
 
         var folders = await context.CallActivityAsync<DocumentFolders>(
             nameof(GetDocumentFoldersActivity), input, retryPolicy);
