@@ -5,7 +5,9 @@
     "durableTask": {
       "storageProvider": {
         "type": "azureManaged",
-        "connectionStringName": "DTS_CONNECTION_STRING"
+        "connectionStringName": "DTS_CONNECTION_STRING",
+        "payloadStorageEnabled": true,
+        "payloadStorageThresholdBytes": 262144
       },
       "hubName": "%TASKHUB_NAME%"
     }
