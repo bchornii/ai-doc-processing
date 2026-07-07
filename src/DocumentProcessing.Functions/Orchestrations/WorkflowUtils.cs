@@ -22,7 +22,7 @@ public static class WorkflowUtils
             firstRetryInterval: TimeSpan.FromSeconds(5),
             backoffCoefficient: 2.0));
 
-    public static IProcessingStrategy RetrieveMatchingProcessingStrategy(
+    public static IProcessingStrategy RetrieveDocumentProcessingStrategy(
         IReadOnlyList<PageClassification>? pageClassifications)
     {
         if (pageClassifications is null || pageClassifications.Count == 0)
