@@ -1,4 +1,4 @@
----
+﻿---
 
 description: "Task list for Durable Functions Workflow Foundation"
 ---
@@ -128,7 +128,7 @@ description: "Task list for Durable Functions Workflow Foundation"
 
 **Independent Test**: Publish a valid Base64-encoded message to the local `documents` queue; verify a new root orchestration starts and reaches Completed status.
 
-- [ ] T049 [US4] Implement src/DocumentProcessing.Functions/Triggers/ProcessDocumentsQueueTrigger.cs — Queue trigger on queue-name "documents"; receive message as string; Base64-decode and deserialize to DocumentBatchRequest; if decode/deserialize fails or ContainerName is empty, log error with correlationId and rethrow to trigger dead-lettering after retry exhaustion; generate correlationId via Guid.NewGuid().ToString(); start ProcessDocumentBatchWorkflow via DurableTaskClient.ScheduleNewOrchestrationInstanceAsync with ProcessDocumentBatchInput; log instanceId and correlationId as structured properties (FR-001a, FR-008)
+- [X] T049 [US4] Implement src/DocumentProcessing.Functions/Triggers/ProcessDocumentsQueueTrigger.cs — Queue trigger on queue-name "documents"; receive message as string; Base64-decode and deserialize to DocumentBatchRequest; if decode/deserialize fails or ContainerName is empty, log error with correlationId and rethrow to trigger dead-lettering after retry exhaustion; generate correlationId via Guid.NewGuid().ToString(); start ProcessDocumentBatchWorkflow via DurableTaskClient.ScheduleNewOrchestrationInstanceAsync with ProcessDocumentBatchInput; log instanceId and correlationId as structured properties (FR-001a, FR-008)
 
 ---
 

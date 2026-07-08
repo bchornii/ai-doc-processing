@@ -7,6 +7,8 @@ namespace DocumentProcessing.Functions.Extensions;
 
 public static class FunctionsHttpExtensions
 {
+    private static readonly JsonSerializerOptions JsonOptions = new() { PropertyNameCaseInsensitive = false };
+
     /// <summary>
     /// Get correlation id from <c>X-Correlation-Id</c> header of generate one if missing.
     /// </summary>
@@ -17,6 +19,9 @@ public static class FunctionsHttpExtensions
         && !string.IsNullOrEmpty(headerValue)
             ? headerValue.ToString()
             : Guid.NewGuid().ToString();
+
+    public static string CreateCorrelationId()
+        => Guid.NewGuid().ToString();
 
     public static IResult InvalidStorageContainer() =>
         TypedResults.Problem(new ProblemDetails
@@ -32,6 +37,20 @@ public static class FunctionsHttpExtensions
         {
             return await req.ReadFromJsonAsync<DocumentBatchRequest>()
                       ?? DocumentBatchRequest.Null;
+        }
+        catch (JsonException)
+        {
+            return DocumentBatchRequest.Null;
+        }
+    }
+
+    public static DocumentBatchRequest TryReadDocumentBatchRequest(this string message)
+    {
+        try
+        {
+            var bytes = Convert.FromBase64String(message);
+            var request = JsonSerializer.Deserialize<DocumentBatchRequest>(bytes, JsonOptions);
+            return request ?? DocumentBatchRequest.Null;
         }
         catch (JsonException)
         {
