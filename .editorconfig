@@ -107,7 +107,7 @@ dotnet_style_predefined_type_for_locals_parameters_members = true:error
 dotnet_style_predefined_type_for_member_access = true:error
 # Modifier preferences
 # https://docs.microsoft.com/visualstudio/ide/editorconfig-language-conventions#normalize-modifiers
-dotnet_style_require_accessibility_modifiers = always:for_non_interface_members
+dotnet_style_require_accessibility_modifiers = for_non_interface_members
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:error
 visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,Dim,Const,WithEvents,Widening,Narrowing,Custom,Async:error
 dotnet_style_readonly_field = true:error
@@ -1296,6 +1296,8 @@ dotnet_diagnostic.IL3001.severity = warning
 # IDE0050: Convert to tuple
 dotnet_diagnostic.IDE0050.severity = none
 
+# IDE0160: Convert to block scoped namespace
+dotnet_diagnostic.IDE0160.severity = none
 
 ####################################
 # StyleCop Rules

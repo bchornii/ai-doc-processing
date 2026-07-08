@@ -1,0 +1,26 @@
+﻿{
+  "version": "2.0",
+  "telemetryMode": "OpenTelemetry",
+  "extensions": {
+    "durableTask": {
+      "storageProvider": {
+        "type": "azureManaged",
+        "connectionStringName": "DTS_CONNECTION_STRING",
+        "payloadStorageEnabled": true,
+        "payloadStorageThresholdBytes": 262144
+      },
+      "tracing": {
+        "DistributedTracingEnabled": true,
+        "Version": "V2"
+      },
+      "hubName": "%TASKHUB_NAME%"
+    }
+  },
+  "logging": {
+    "logLevel": {
+      "default": "Information",
+      "Azure.Core": "Warning",
+      "Azure.Identity": "Warning"
+    }
+  }
+}
