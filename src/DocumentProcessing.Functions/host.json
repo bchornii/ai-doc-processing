@@ -9,6 +9,10 @@
         "payloadStorageEnabled": true,
         "payloadStorageThresholdBytes": 262144
       },
+      "tracing": {
+        "DistributedTracingEnabled": true,
+        "Version": "V2"
+      },
       "hubName": "%TASKHUB_NAME%"
     }
   },
