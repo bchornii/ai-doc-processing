@@ -13,11 +13,11 @@ public class ProcessBoundedDocument : IProcessingStrategy
         ProcessingContext processingContext,
         CancellationToken cancellationToken = default)
     {
-        var (context, folder, documentFileName, correlationId, retryPolicy) = input;
+        var (context, folder, blobName, correlationId, retryPolicy) = input;
         var logger = context.CreateReplaySafeLogger(nameof(ProcessDocumentWorkflow));
 
         var detectBoundariesInput =
-            new DetectBoundariesActivityInput(folder.ContainerName, documentFileName, correlationId);
+            new DetectBoundariesActivityInput(folder.ContainerName, blobName, correlationId);
         var boundaryResult = await context
             .CallActivityAsync<BoundaryDetectionResult>(nameof(DetectBoundariesActivity), detectBoundariesInput, retryPolicy);
 
@@ -25,9 +25,9 @@ public class ProcessBoundedDocument : IProcessingStrategy
         {
             logger.LogError(
                 "No segments detected for document {DocumentFileName} CorrelationId={CorrelationId}",
-                documentFileName,
+                blobName,
                 correlationId);
-            processingContext.AddError($"No segments detected for {documentFileName}");
+            processingContext.AddError($"No segments detected for {blobName}");
             return;
         }
 
@@ -38,7 +38,7 @@ public class ProcessBoundedDocument : IProcessingStrategy
                     segment,
                     folder.ContainerName,
                     folder.Name,
-                    documentFileName,
+                    blobName,
                     correlationId);
 
                 return context
@@ -53,7 +53,7 @@ public class ProcessBoundedDocument : IProcessingStrategy
 
         var persistSegmentsInput = new PersistResultActivityInput(
             folder.ContainerName,
-            documentFileName,
+            blobName,
             JsonSerializer.SerializeToUtf8Bytes(segmentResults),
             correlationId);
 

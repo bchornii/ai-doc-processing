@@ -81,8 +81,9 @@ public static class ProcessDocumentWorkflow
         ILogger logger,
         ProcessingContext processingCtx)
     {
+        var blobName = folder.BlobPath(documentFileName);
         var classifyDocumentInput =
-            new ClassifyDocumentActivityInput(folder.ContainerName, documentFileName, correlationId);
+            new ClassifyDocumentActivityInput(folder.ContainerName, blobName, correlationId);
         var classificationResult = await context
             .CallActivityAsync<ConfidenceResult<Classifications>?>(nameof(ClassifyDocumentActivity), classifyDocumentInput, retryPolicy);
 
@@ -98,7 +99,7 @@ public static class ProcessDocumentWorkflow
 
         var persistClassificationResultInput = new PersistResultActivityInput(
             folder.ContainerName,
-            documentFileName,
+            blobName,
             JsonSerializer.SerializeToUtf8Bytes(classificationResult),
             correlationId);
         await context.CallActivityAsync<bool>(nameof(PersistResultActivity), persistClassificationResultInput, retryPolicy);
@@ -128,7 +129,7 @@ public static class ProcessDocumentWorkflow
                 correlationId);
         }
 
-        var processingInput = new ProcessingInput(context, folder, documentFileName, correlationId, retryPolicy);
+        var processingInput = new ProcessingInput(context, folder, blobName, correlationId, retryPolicy);
         await processingStrategy.RunAsync(processingInput, processingCtx);
     }
 }
