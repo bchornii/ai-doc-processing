@@ -48,8 +48,7 @@ public static class FunctionsHttpExtensions
     {
         try
         {
-            var bytes = Convert.FromBase64String(message);
-            var request = JsonSerializer.Deserialize<DocumentBatchRequest>(bytes, JsonOptions);
+            var request = JsonSerializer.Deserialize<DocumentBatchRequest>(message, JsonOptions);
             return request ?? DocumentBatchRequest.Null;
         }
         catch (JsonException)
